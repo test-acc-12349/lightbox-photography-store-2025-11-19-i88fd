@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lightbox Photography Store - Professional Photo Gallery and Expert Equipment Support">
+    <meta name="keywords" content="photography, lightbox, equipment, professional gallery">
+    <meta name="author" content="Lightbox Photography Store">
+    <title>Lightbox Photography Store | Professional Photography Equipment & Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+        }
+        
+        .transition-all {
+            transition: all 300ms ease-in-out;
+        }
+        
+        .transition-shadow {
+            transition: box-shadow 300ms ease-in-out;
+        }
+        
+        .transition-transform {
+            transition: transform 300ms ease-in-out;
+        }
+        
+        .transition-colors {
+            transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
+        }
+        
+        .btn-primary {
+            @apply px-8 py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 transition-colors duration-300 transform hover:scale-105 inline-block;
+        }
+        
+        .btn-secondary {
+            @apply px-8 py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-100 transition-colors duration-300 transform hover:scale-105 inline-block border border-gray-200;
+        }
+        
+        .card-hover {
+            @apply transition-all duration-300 hover:shadow-xl hover:scale-105;
+        }
+        
+        .section-heading {
+            @apply text-4xl md:text-5xl font-bold text-gray-900 tracking-tight mb-4;
+        }
+        
+        .section-subheading {
+            @apply text-xl text-gray-600 leading-relaxed max-w-2xl;
+        }
+        
+        .faq-item {
+            @apply border-b border-gray-200 py-6 last:border-b-0;
+        }
+        
+        .faq-question {
+            @apply flex items-center justify-between cursor-pointer py-4 px-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-300;
+        }
+        
+        .faq-answer {
+            @apply px-6 py-4 text-gray-700 leading-relaxed;
+        }
+        
+        .hero-overlay {
+            @apply absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30;
+        }
+        
+        .testimonial-card {
+            @apply bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100;
+        }
+        
+        .star-rating {
+            @apply flex gap-1 mb-4;
+        }
+        
+        .star {
+            @apply text-yellow-400;
+        }
+        
+        .mobile-menu {
+            @apply absolute top-full left-0 right-0 bg-white shadow-lg rounded-b-lg overflow-hidden z-40;
+        }
+        
+        .mobile-menu.active {
+            @apply block;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 500ms ease-out forwards;
+        }
+        
+        .announcement-bar {
+            @apply bg-gray-900 text-white py-3 px-4 text-center text-sm md:text-base;
+        }
+        
+        .header-sticky {
+            @apply sticky top-0 z-50 bg-white shadow-md;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <i class="fas fa-truck mr-2"></i>
+        Fast Worldwide Shipping (5 days delivery) | 100% Satisfaction Guarantee
+    </div>
+
+    <!-- Header -->
+    <header class="header-sticky">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center gap-2">
+                <i class="fas fa-camera text-2xl text-black"></i>
+                <span class="text-2xl font-bold text-black">Lightbox</span>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#home" class="text-gray-700 hover:text-black transition-colors duration-300 font-medium">Home</a>
+                <a href="#features" class="text-gray-700 hover:text-black transition-colors duration-300 font-medium">Features</a>
+                <a href="#benefits" class="text-gray-700 hover:text-black transition-colors duration-300 font-medium">Benefits</a>
+                <a href="#about" class="text-gray-700 hover:text-black transition-colors duration-300 font-medium">About</a>
+                <a href="#testimonials" class="text-gray-700 hover:text-black transition-colors duration-300 font-medium">Testimonials</a>
+                <a href="#faq" class="text-gray-700 hover:text-black transition-colors duration-300 font-medium">FAQ</a>
+                <a href="#contact" class="text-gray-700 hover:text-black transition-colors duration-300 font-medium">Contact</a>
+            </nav>
+
+            <!-- Right Side Actions -->
+            <div class="hidden md:flex items-center gap-4">
+                <div class="relative">
+                    <input type="text" placeholder="Search..." class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors duration-300" />
+                    <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
+                </div>
+                <a href="https://plb.com" class="btn-primary">
+                    Buy Now
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-button md:hidden text-gray-700 hover:text-black transition-colors duration-300" aria-label="Toggle menu">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-menu hidden md:hidden bg-white border-t border-gray-200">
+            <nav class="flex flex-col">
+                <a href="#home" class="px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors duration-300 border-b border-gray-100">Home</a>
+                <a href="#features" class="px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors duration-300 border-b border-gray-100">Features</a>
+                <a href="#benefits" class="px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors duration-300 border-b border-gray-100">Benefits</a>
+                <a href="#about" class="px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors duration-300 border-b border-gray-100">About</a>
+                <a href="#testimonials" class="px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors duration-300 border-b border-gray-100">Testimonials</a>
+                <a href="#faq" class="px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors duration-300 border-b border-gray-100">FAQ</a>
+                <a href="#contact" class="px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors duration-300 border-b border-gray-100">Contact</a>
+                <div class="px-4 py-3">
+                    <a href="https://plb.com" class="btn-primary w-full text-center">
+                        Buy Now
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen md:h-[600px] flex items-center justify-center overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1504093376055-b3094b674dcb?w=1600&h=900&fit=crop&q=80" alt="Professional photography setup" class="absolute inset-0 w-full h-full object-cover" />
+        <div class="hero-overlay"></div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight leading-tight fade-in-up">
+                Lightbox Photography Store
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-100 mb-8 leading-relaxed fade-in-up" style="animation-delay: 100ms;">
+                Professional photo gallery and expert equipment support for photographers of all levels
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in-up" style="animation-delay: 200ms;">
+                <a href="https://plb.com" class="px-8 py-4 bg-white text-black font-bold text-lg rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 inline-block">
+                    Explore Gallery
+                </a>
+                <a href="#features" class="px-8 py-4 bg-transparent text-white font-bold text-lg rounded-lg border-2 border-white hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105 inline-block">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-heading">Powerful Features</h2>
+                <p class="section-subheading mx-auto">Everything you need to showcase and manage your photography</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                <!-- Feature 1: Professional Photo Gallery -->
+                <div class="card-hover bg-white p-8 rounded-xl border border-gray-100 shadow-md">
+                    <div class="mb-6 inline-flex items-center justify-center w-16 h-16 bg-black rounded-lg">
+                        <i class="fas fa-images text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Professional Photo Gallery</h3>
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        Display your work in stunning high-resolution galleries with customizable layouts, automatic optimization, and seamless browsing experience for your audience.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-gray-700">
+                            <i class="fas fa-check text-black font-bold"></i>
+                            <span>High-resolution image support</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-700">
+                            <i class="fas fa-check text-black font-bold"></i>
+                            <span>Customizable gallery layouts</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-700">
+                            <i class="fas fa-check text-black font-bold"></i>
+                            <span>Fast loading times</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Feature 2: Expert Equipment Support -->
+                <div class="card-hover bg-white p-8 rounded-xl border border-gray-100 shadow-md">
+                    <div class="mb-6 inline-flex items-center justify-center w-16 h-16 bg-black rounded-lg">
+                        <i class="fas fa-headset text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Expert Equipment Support</h3>
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        Get professional guidance from photography experts on camera selection, lighting equipment, and accessories tailored to your specific needs and budget.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-gray-700">
+                            <i class="fas fa-check text-black font-bold"></i>
+                            <span>Expert consultation available</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-700">
+                            <i class="fas fa-check text-black font-bold"></i>
+                            <span>Equipment recommendations</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-700">
+                            <i class="fas fa-check text-black font-bold"></i>
+                            <span>24/7 customer support</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <h2 class="section-heading">Why Choose Lightbox</h2>
+                <p class="section-subheading mx-auto">Discover the advantages that make us the preferred choice for photographers</p>
+            </div>
+
+            <!-- Benefit 1: Showcase Photos Professionally (Text Left, Image Right) -->
+            <div class="mb-20 bg-white rounded-xl overflow-hidden shadow-md">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
+                    <div class="p-8 md:p-12 flex flex-col justify-center">
+                        <div class="mb-4 inline-flex items-center justify-center w-14 h-14 bg-black rounded-lg">
+                            <i class="fas fa-star text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Showcase Photos Professionally</h3>
+                        <p class="text-gray-700 leading-relaxed mb-6 text-lg">
+                            Transform your photography portfolio into a professional showcase that captivates clients and showcases your best work. Our platform provides the tools you need to present your images in the best possible light with advanced editing capabilities, custom branding, and professional presentation options.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed mb-8">
+                            Whether you're a professional photographer, artist, or creative entrepreneur, our gallery system ensures your work receives the attention it deserves with mobile-responsive design, fast loading times, and intuitive navigation.
+                        </p>
+                        <a href="https://plb.com" class="btn-primary w-fit">
+                            Start Showcasing
+                        </a>
+                    </div>
+                    <div class="h-96 md:h-auto">
+                        <img src="https://images.unsplash.com/photo-1556740714-a8395b3bf30f?w=800&h=600&fit=crop&q=80" alt="Professional photo showcase" class="w-full h-full object-cover" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefit 2: Expert Gear Guidance (Text Right, Image Left) -->
+            <div class="mb-20 bg-gray-50 rounded-xl overflow-hidden shadow-md">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
+                    <div class="h-96 md:h-auto order-2 md:order-1">
+                        <img src="https://images.unsplash.com/photo-1502982720700-bfff97f2ecac?w=800&h=600&fit=crop&q=80" alt="Photography equipment and gear" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="p-8 md:p-12 flex flex-col justify-center order-1 md:order-2">
+                        <div class="mb-4 inline-flex items-center justify-center w-14 h-14 bg-black rounded-lg">
+                            <i class="fas fa-cogs text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Expert Gear Guidance</h3>
+                        <p class="text-gray-700 leading-relaxed mb-6 text-lg">
+                            Navigate the complex world of photography equipment with confidence. Our team of experienced photographers provides personalized recommendations based on your skill level, photography style, and budget. From entry-level cameras to professional-grade lighting rigs, we guide you to the perfect equipment.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed mb-8">
+                            We understand that choosing the right gear can be overwhelming. That's why we offer detailed comparisons, hands-on demonstrations, and expert consultations to ensure you make informed decisions that enhance your photography capabilities.
+                        </p>
+                        <a href="https://plb.com" class="btn-primary w-fit">
+                            Get Expert Advice
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefit 3: Premium Support & Community (Text Left, Image Right) -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-md">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
+                    <div class="p-8 md:p-12 flex flex-col justify-center">
+                        <div class="mb-4 inline-flex items-center justify-center w-14 h-14 bg-black rounded-lg">
+                            <i class="fas fa-users text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Premium Support & Community</h3>
+                        <p class="text-gray-700 leading-relaxed mb-6 text-lg">
+                            Join a vibrant community of photographers and get access to exclusive resources, tutorials, and networking opportunities. Our dedicated support team is available around the clock to help with any questions or technical issues you might encounter.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed mb-8">
+                            From beginner tips to advanced techniques, our comprehensive knowledge base and active community forums provide endless learning opportunities. Connect with fellow photographers, share your work, and grow your skills together.
+                        </p>
+                        <a href="https://plb.com" class="btn-primary w-fit">
+                            Join Community
+                        </a>
+                    </div>
+                    <div class="h-96 md:h-auto">
+                        <img src="https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?w=800&h=600&fit=crop&q=80" alt="Photography community and support" class="w-full h-full object-cover" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-heading">About Lightbox</h2>
+                <p class="section-subheading mx-auto">Our story and commitment to photography excellence</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&q=80" alt="Lightbox Photography Store team" class="rounded-xl shadow-lg w-full h-auto" />
+                </div>
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Our Heritage</h3>
+                        <p class="text-gray-700 leading-relaxed text-lg">
+                            Founded in 2010, Lightbox Photography Store emerged from a passion for democratizing professional photography. Our founders, a collective of award-winning photographers and tech enthusiasts, recognized a gap in the market for a comprehensive platform that combines expert guidance with beautiful gallery solutions. What started as a small community has grown into a trusted resource serving thousands of photographers worldwide, from hobbyists capturing their first images to professionals running successful photography businesses.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
+                        <p class="text-gray-700 leading-relaxed text-lg">
+                            We are committed to empowering photographers at every level by providing exceptional tools, expert knowledge, and a supportive community. Our mission is to make professional-quality photography accessible to everyone, regardless of their experience or budget. We believe that great photography comes from the combination of the right tools, proper guidance, and continuous learning. Through our platform, we strive to inspire creativity, foster collaboration, and help photographers achieve their artistic and business goals while maintaining the highest standards of customer service and product excellence.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-gradient-to-r from-gray-900 to-black text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1600&h=900&fit=crop&q=80" alt="Photography background" class="w-full h-full object-cover" />
+        </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Ready to Elevate Your Photography?</h2>
+            <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+                Join thousands of photographers who have transformed their work with Lightbox. Get instant access to professional tools and expert support today.
+            </p>
+            <a href="https://plb.com" class="inline-block px-10 py-4 bg-white text-black font-bold text-lg rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
+                Start Your Free Trial
+            </a>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-heading">What Photographers Say</h2>
+                <p class="section-subheading mx-auto">Real experiences from real photographers using Lightbox</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="star-rating">
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-6 text-base">
+                        "Lightbox completely transformed how I present my work to clients. The professional gallery templates and easy customization options helped me land 40% more bookings in just three months. The equipment guidance from their experts also helped me choose the perfect lighting setup for my studio."
+                    </p>
+                    <div class="border-t border-gray-200 pt-4">
+                        <p class="font-bold text-gray-900">Sarah Mitchell</p>
+                        <p class="text-gray-600 text-sm">Professional Portrait Photographer</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="star-rating">
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-6 text-base">
+                        "As a beginner, I was overwhelmed by all the equipment options. The expert consultation service at Lightbox saved me hundreds of dollars by recommending gear that actually matched my needs. Their support team is incredibly responsive and knowledgeable."
+                    </p>
+                    <div class="border-t border-gray-200 pt-4">
+                        <p class="font-bold text-gray-900">Marcus Chen</p>
+                        <p class="text-gray-600 text-sm">Emerging Photography Enthusiast</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <div class="star-rating">
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-6 text-base">
+                        "The community aspect of Lightbox is invaluable. I've learned so much from other photographers, and the collaborative environment has pushed me to improve my craft. My portfolio now stands out, and I've connected with amazing collaborators through the platform."
+                    </p>
+                    <div class="border-t border-gray-200 pt-4">
+                        <p class="font-bold text-gray-900">Jessica Rodriguez</p>
+                        <p class="text-gray-600 text-sm">Wedding & Events Photographer</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="testimonial-card">
+                    <div class="star-rating">
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-6 text-base">
+                        "Running my photography business is now so much easier. The gallery management tools are intuitive, the client communication features save me hours each week, and the expert equipment recommendations help me stay current with industry standards. Best investment I've made for my business."
+                    </p>
+                    <div class="border-t border-gray-200 pt-4">
+                        <p class="font-bold text-gray-900">David Thompson</p>
+                        <p class="text-gray-600 text-sm">Commercial Photography Studio Owner</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-heading">Frequently Asked Questions</h2>
+                <p class="section-subheading mx-auto">Find answers to common questions about Lightbox</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-gray-900 text-lg">What makes Lightbox different from other photography platforms?</span>
+                        <i class="fas fa-chevron-down text-gray-600 transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer hidden">
+                        <p class="text-gray-700 leading-relaxed">
+                            Lightbox stands out by combining three essential services in one platform: professional gallery solutions, expert equipment guidance, and a vibrant community. Unlike other platforms that focus solely on storage or social sharing, we provide end-to-end support for photographers. Our expert team offers personalized equipment recommendations, our gallery tools are specifically designed for professional presentation, and our community connects photographers for collaboration and learning. This integrated approach means you get everything you need to succeed in one place, with dedicated support from photography professionals who understand your challenges.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-gray-900 text-lg">How do I get expert equipment guidance?</span>
+                        <i class="fas fa-chevron-down text-gray-600 transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer hidden">
+                        <p class="text-gray-700 leading-relaxed">
+                            Our expert consultation is simple and accessible. You can schedule a one-on-one consultation with our photography experts through your dashboard, participate in live Q&A sessions held twice weekly, or browse our extensive equipment recommendation database filtered by your photography style and budget. For premium members, we offer unlimited consultations and priority support. Simply describe your photography goals, current equipment, and budget, and our team will provide tailored recommendations based on your specific needs. We also provide detailed comparison guides and hands-on reviews of popular equipment to help you make informed decisions.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-gray-900 text-lg">Is my photography portfolio secure on Lightbox?</span>
+                        <i class="fas fa-chevron-down text-gray-600 transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer hidden">
+                        <p class="text-gray-700 leading-relaxed">
+                            Absolutely. We take security and privacy extremely seriously. All images are stored with bank-level encryption, and we maintain regular security audits and backups. You have complete control over who can access your portfolio with customizable privacy settings, password protection options, and the ability to watermark your images. We also provide detailed access logs so you can see exactly who has viewed your work. Your intellectual property is protected with our Digital Rights Management (DRM) system, and we comply with all international data protection regulations including GDPR and CCPA.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-gray-900 text-lg">What subscription plans are available?</span>
+                        <i class="fas fa-chevron-down text-gray-600 transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer hidden">
+                        <p class="text-gray-700 leading-relaxed">
+                            We offer flexible subscription plans to suit every photographer's needs. Our Starter plan ($9.99/month) includes basic gallery hosting and community access. The Professional plan ($29.99/month) adds unlimited galleries, expert consultations, and advanced customization. Our Premium plan ($79.99/month) includes everything plus priority support, advanced analytics, and exclusive networking events. We also offer annual subscriptions with significant discounts (up to 30% off) and a 30-day free trial so you can experience all features risk-free. All plans include our satisfaction guarantee—if you're not happy, we'll refund your money within 60 days.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-heading">Get In Touch</h2>
+                <p class="section-subheading mx-auto">Have questions? We'd love to hear from you</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <!-- Contact Info Card 1 -->
+                <div class="bg-white p-8 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow duration-300">
+                    <div class="mb-4 inline-flex items-center justify-center w-14 h-14 bg-black rounded-lg">
+                        <i class="fas fa-envelope text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Email</h3>
+                    <p class="text-gray-700 mb-4">admin@plb.com</p>
+                    <p class="text-gray-600 text-sm">We'll respond within 24 hours</p>
+                </div>
+
+                <!-- Contact Info Card 2 -->
+                <div class="bg-white p-8 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow duration-300">
+                    <div class="mb-4 inline-flex items-center justify-center w-14 h-14 bg-black rounded-lg">
+                        <i class="fas fa-clock text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Support Hours</h3>
+                    <p class="text-gray-700 mb-4">24/7 Available</p>
+                    <p class="text-gray-600 text-sm">Live chat and email support</p>
+                </div>
+
+                <!-- Contact Info Card 3 -->
+                <div class="bg-white p-8 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow duration-300">
+                    <div class="mb-4 inline-flex items-center justify-center w-14 h-14 bg-black rounded-lg">
+                        <i class="fas fa-globe text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Website</h3>
+                    <p class="text-gray-700 mb-4">plb.com</p>
+                    <p class="text-gray-600 text-sm">Visit our full site for more</p>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="max-w-2xl mx-auto bg-white p-8 md:p-12 rounded-lg shadow-md">
+                <form class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block text-gray-900 font-semibold mb-2">Full Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors duration-300" placeholder="Your name" required />
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-900 font-semibold mb-2">Email Address</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors duration-300" placeholder="your@email.com" required />
+                        </div>
+                    </div>
+                    <div>
+                        <label for="subject" class="block text-gray-900 font-semibold mb-2">Subject</label>
+                        <input type="text" id="subject" name="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors duration-300" placeholder="How can we help?" required />
+                    </div>
+                    <div>
+                        <label for="message" class="block text-gray-900 font-semibold mb-2">Message</label>
+                        <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors duration-300 resize-none" placeholder="Tell us more about your inquiry..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary w-full text-center">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fas fa-camera text-white text-2xl"></i>
+                        <span class="text-2xl font-bold text-white">Lightbox</span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Empowering photographers worldwide with professional tools, expert guidance, and a vibrant community.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Facebook">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Twitter">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Instagram">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#home" class="text-gray-400 hover:text-white transition-colors duration-300">Home</a>
+                        </li>
+                        <li>
+                            <a href="#features" class="text-gray-400 hover:text-white transition-colors duration-300">Features</a>
+                        </li>
+                        <li>
+                            <a href="#benefits" class="text-gray-400 hover:text-white transition-colors duration-300">Benefits</a>
+                        </li>
+                        <li>
+                            <a href="#about" class="text-gray-400 hover:text-white transition-colors duration-300">About Us</a>
+                        </li>
+                        <li>
+                            <a href="#testimonials" class="text-gray-400 hover:text-white transition-colors duration-300">Testimonials</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Resources -->
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-6">Resources</h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#faq" class="text-gray-400 hover:text-white transition-colors duration-300">FAQ</a>
+                        </li>
+                        <li>
+                            <a href="blog.html" class="text-gray-400 hover:text-white transition-colors duration-300">Blog</a>
+                        </li>
+                        <li>
+                            <a href="#contact" class="text-gray-400 hover:text-white transition-colors duration-300">Contact</a>
+                        </li>
+                        <li>
+                            <a href="https://plb.com" class="text-gray-400 hover:text-white transition-colors duration-300">Main Website</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-6">Legal</h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="privacy.html" class="text-gray-400 hover:text-white transition-colors duration-300">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a href="terms.html" class="text-gray-400 hover:text-white transition-colors duration-300">Terms of Service</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Cookie Policy</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Refund Policy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="border-t border-gray-800 pt-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <p class="text-gray-400">
+                            &copy; <span id="year"></span> Lightbox Photography Store. All rights reserved.
+                        </p>
+                    </div>
+                    <div class="flex justify-start md:justify-end gap-6">
+                        <a href="privacy.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Privacy</a>
+                        <a href="terms.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Terms</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Cookies</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // FAQ Toggle Function
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            // Close all other FAQs
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                if (item !== answer) {
+                    item.classList.add('hidden');
+                    item.previousElementSibling.querySelector('i').style.transform = 'rotate(0deg)';
+                }
+            });
+
+            // Toggle current FAQ
+            answer.classList.toggle('hidden');
+            
+            // Rotate icon
+            if (answer.classList.contains('hidden')) {
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Smooth scroll behavior for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animation to elements
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card-hover, .testimonial-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 500ms ease-out, transform 500ms ease-out';
+            observer.observe(el);
+        });
+
+        // Form submission
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! We will get back to you soon.');
+                form.reset();
+            });
+        }
+    </script>
+</body>
+</html>
